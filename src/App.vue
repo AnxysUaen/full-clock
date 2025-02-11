@@ -1,14 +1,15 @@
-<script setup lang="ts">
+<script setup>
 import useStore, { SecondStyle } from './store/index';
 import { useElementSize } from '@vueuse/core';
 import { ref, computed } from 'vue';
 import { VDialog } from 'vuetify/components/VDialog';
 import { VBtn } from 'vuetify/components/VBtn';
-import { mdiCog, mdiFullscreen, mdiFullscreenExit } from '@mdi/js';
-import { useFullscreen } from '@vueuse/core';
+import { mdiCog } from '@mdi/js';
 import Settings from './components/Settings.vue';
 
 const store = useStore();
+
+const showSetting = ref(false);
 
 const elTime = ref();
 const elWindow = ref();
@@ -65,28 +66,25 @@ const barStyle = computed(() => {
   }
 });
 
-const { toggle, isFullscreen } = useFullscreen();
-const fullscreenIcon = computed(() => isFullscreen.value ? mdiFullscreenExit : mdiFullscreen);
-const fullscreenHint = computed(() => isFullscreen.value ? '退出全屏' : '全屏');
 </script>
 
 <template>
   <div>
     <div class="full-wrapper" :style="wrapperStyle">
       <div class="d-flex justify-center">
-        <v-dialog max-width="600" v-model="store.settingsOpen">
+        <v-dialog max-width="600" v-model="store.settingsOpen" v-if="showSetting">
           <template v-slot:activator="{ props }">
             <v-btn :prepend-icon="mdiCog" v-bind="props" color="primary">设置</v-btn>
           </template>
           <settings></settings>
         </v-dialog>
         <span class="title">{{ store.title }}</span>
-        <v-btn :append-icon="fullscreenIcon" @click="toggle()" color="success">{{ fullscreenHint }}</v-btn>
       </div>
       <div class="time-window" ref="elWindow">
-        <div class="main-time" ref="elTime" :style="scaleStyle">{{ store.displayTime }}</div>
+        <div class="main-time" ref="elTime" :style="scaleStyle" @dblclick="showSetting = !showSetting">{{ store.displayTime }}</div>
         <div :class="barStyle.class" :style="barStyle.style"></div>
       </div>
+      <span style="text-align: center;">{{ store.title }}</span>
     </div>
   </div>
 </template>

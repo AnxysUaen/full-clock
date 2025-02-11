@@ -19,11 +19,11 @@ export const enum TitleStyle {
 const useStore = defineStore("index", () => {
   const now = ref(dayjs(new Date()));
   const preferences = useLocalStorage('FL_preferences', {
-    background: '#004400',
-    foreground: '#FFFFFF',
+    background: '#C7FFED',
+    foreground: '#015958',
     fontFamily: 'numberonly, Arial, 等线, sans-serif',
     secondStyle: SecondStyle.FullscreenBar,
-    colorProgress: '#00550080',
+    colorProgress: '#00ABBD50',
     titleStyle: TitleStyle.Date,
     titleCustomized: '',
   });
