@@ -65,7 +65,6 @@ const barStyle = computed(() => {
       }
   }
 });
-
 </script>
 
 <template>
@@ -84,7 +83,7 @@ const barStyle = computed(() => {
         <div class="main-time" ref="elTime" :style="scaleStyle" @dblclick="showSetting = !showSetting">{{ store.displayTime }}</div>
         <div :class="barStyle.class" :style="barStyle.style"></div>
       </div>
-      <span style="text-align: center;">{{ store.title }}</span>
+      <a style="text-align: center;" target="_blank" href="https://beian.miit.gov.cn">辽ICP备2025049633号-1</a>
     </div>
   </div>
 </template>
